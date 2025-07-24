@@ -59,7 +59,6 @@ class BDD100KDataset(Dataset):
         return image, binary_mask
 
 
-# --- IoU Hesaplama ---
 def compute_iou(preds, targets):
     preds = preds.bool()
     targets = targets.bool()
@@ -69,13 +68,11 @@ def compute_iou(preds, targets):
     return iou.mean().item()
 
 
-# --- Model Getirme ---
 def get_deeplab_model():
     model = deeplabv3_resnet50(weights=None, num_classes=NUM_CLASSES)
     return model
 
 
-# --- Ana Eğitim Fonksiyonu ---
 def train():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model = get_deeplab_model().to(device)
